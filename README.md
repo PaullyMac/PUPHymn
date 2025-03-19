@@ -42,3 +42,9 @@ To run this project locally, follow these simple steps:
    ```
    start index.html  (on Windows)
    ```
+
+## Live Demo
+
+Lazy to clone this repo? No worries, this project is currently deployed on Netlify. You can view the live version here:
+
+[https://puphymn-pmac.netlify.app/](https://puphymn-pmac.netlify.app/)
