@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUP Hymn</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="./PUPLogo.ico" type="image/x-icon">
+</head>
+<body style="background: url('hero-bg-removed.jpg') no-repeat center center fixed; background-size: cover; min-height: 100vh; margin: 0; padding: 0; overflow: hidden;"> 
+  <div id="top-banner">
+    <img src="PUPLogo.png" alt="PUP Logo" id="pup-logo">
+    <div class="banner-text">
+      <h1 class="university-name">Polytechnic University of the Philippines</h1>
+      <p class="university-tagline">The Country's 1st PolytechnicU</p>
+    </div>
+  </div>
+  
+  <header id="hero">
+    <h1>PUP Hymn</h1>
+    <h2 class="subtitle">(Imno ng PUP)</h2>
+    <p class="authors">S. Calabig, S. Roldan, and R. Amaranto</p>
+  </header>
+
+  <main>
+    <section id="lyrics">
+      <div class="lyric-line" data-time="12">Sintang Paaralan</div>
+      <div class="lyric-line" data-time="14.8">Tanglaw ka ng bayan</div>
+      <div class="lyric-line" data-time="17.5">Pandayan ng isip ng kabataan</div>
+      <div class="lyric-line" data-time="23">Kami ay dumating nang salat sa yaman</div>
+      <div class="lyric-line" data-time="29">Hanap na dunong ay iyong alay</div>
+      <div class="lyric-line" data-time="35">Ang layunin mong makatao</div>
+      <div class="lyric-line" data-time="41">Dinarangal ang Pilipino</div>
+      <div class="lyric-line" data-time="47">Ang iyong aral, diwa, adhikang taglay</div>
+      <div class="lyric-line" data-time="53">PUP, aming gabay</div>
+      <div class="lyric-line" data-time="56">Paaralang dakila</div>
+      <div class="lyric-line" data-time="62">PUP, pinagpala</div>
+      <div class="lyric-line" data-time="68">Gagamitin ang karunungan</div>
+      <div class="lyric-line" data-time="74">Mula sa iyo, para sa bayan</div>
+      <div class="lyric-line" data-time="80">Ang iyong aral, diwa, adhikang taglay</div>
+      <div class="lyric-line" data-time="85.9">PUP, aming gabay</div>
+      <div class="lyric-line" data-time="89">Paaralang dakila</div>
+      <div class="lyric-line" data-time="95">PUP, pinagpala</div>
+    </section>
+  </main>
+
+  <footer id="controls">
+    <audio id="audio-player" src="puphymn.mp3"></audio>
+    <div class="play-button">
+      <button id="backward-btn" title="Back 5s"><img src="backward-outline.png" alt="Back 5s" id="backward-icon"></button>
+      <button id="toggle-btn" title="Play"><img src="play.png" alt="Play" id="toggle-icon"></button>
+      <button id="forward-btn" title="Forward 5s"><img src="forward-outline.png" alt="Forward 5s" id="forward-icon"></button>
+    </div>
+    <div class="player-controls">
+      <span class="current-time">0:00</span>
+      <input type="range" id="progress-bar" min="0" max="100" value="0">
+      <span class="full-time">1:52</span>
+    </div>
+
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

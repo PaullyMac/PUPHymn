@@ -1,0 +1,445 @@
+/* Basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header styling */
+#hero {
+  text-align: center;
+  padding: 40px;
+  margin-top: 100px; /* Keep your existing top margin */
+  position: relative;
+  z-index: 1;
+}
+
+#hero h1 {
+  margin: 0;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 72px;
+  color: #700000;
+  font-family: "Poppins", sans-serif;
+  opacity: 0;
+  animation: fadeInRise 1s ease-out 0.2s forwards;
+}
+
+#hero img {
+  width: 100%;
+  max-width: 8000px; /* Adjust this value as needed */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+#hero .subtitle {
+  color: #700000;
+  font-size: 40px;
+  font-family: "Poppins", sans-serif;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-weight: 650;
+  opacity: 0;
+  animation: fadeInRise 1s ease-out 0.4s forwards;
+}
+
+#hero .authors {
+  font-size: 18px;
+  color: #666;
+  margin-top: 10px;
+  opacity: 0;
+  animation: fadeInRise 1s ease-out 0.6s forwards;
+}
+
+/* Lyrics section styling */
+#lyrics {
+  position: fixed;
+  top: 300px; /* Adjust based on your header height */
+  left: 0;
+  right: 0;
+  bottom: 120px; /* Adjust based on your controls height */
+  padding: 20px;
+  font-size: 24px;
+  text-align: center;
+  line-height: 1.5;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+  margin: 0 auto;
+  max-width: 800px;
+  box-shadow: 0 0 15px rgba(100, 100, 100, 0.3); /* Greyish box shadow */
+  border-radius: 5px; /* Optional: adds rounded corners */
+  opacity: 0;
+  animation: fadeInRise 1.2s ease-out 0.8s forwards;
+}
+
+.lyric-line {
+  padding: 10px;
+  transition: color 0.3s ease;
+  font-family: "Raleway", sans-serif;
+  opacity: 0;
+  animation: fadeInRise 0.8s ease-out forwards;
+}
+
+/* Highlight active lyric */
+.lyric-line.active {
+  color: #700000;
+  font-weight: bold;
+}
+
+/* Control box styling */
+#controls {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #800000, #a52a2a, #670000, #8b0000);
+  color: white;
+  opacity: 0.8;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  max-width: 500px;
+}
+
+.play-button {
+  display: flex;
+  flex-direction: row; /* Changed from column to row */
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  max-width: 500px;
+}
+
+/* Styling for backward and forward buttons */
+#backward-btn, #forward-btn {
+  background: none;
+  border: none;
+  padding: 0px;
+  margin: 0 15px;
+  position: relative;
+}
+
+#backward-btn::after, #forward-btn::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 3px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+#backward-btn:hover::after, #forward-btn:hover::after {
+  opacity: 1;
+}
+
+#backward-icon, #forward-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+/* Hover effect for skip buttons */
+#backward-btn:hover #backward-icon, #forward-btn:hover #forward-icon {
+  transform: scale(1.2);
+  transition: transform 0.2s;
+}
+
+.progress-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.progress-container input[type="range"] {
+  flex-grow: 1;
+  margin: 0 10px;
+}
+
+#progress-bar {
+  width: 100%;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #888888; /* Greyish background color */
+  border-radius: 3px;
+  outline: none;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+#progress-bar:hover {
+  opacity: 1;
+}
+
+/* Updated thumb styling with an attached progress-mark when active */
+#progress-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #ffffff; /* White thumb */
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+}
+
+/* #progress-bar:active::-webkit-slider-thumb::after { */
+  /* content: ""; */
+  /* position: absolute; */
+  /* top: -16px;  Adjust the vertical offset as needed */
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
+  /* width: 8px;  Size of the progress-mark */
+  /* height: 8px; */
+  /* background-color: #000000; Same as thumb */
+  /* border-radius: 50%; */
+/* } */
+
+/* For Firefox support */
+#progress-bar::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: #ffffff; /* White thumb */
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  position: relative;
+}
+
+/* Firefox doesn't support pseudo-elements on the thumb so consider an alternative
+   if required, such as adding a small element overlay via JavaScript when active */
+
+#progress-bar::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #ffffff 0%, #ffffff var(--progress, 0%), #888888 var(--progress, 0%));
+  border-radius: 3px;
+}
+
+#progress-bar::-moz-range-track {
+  background: #888888; /* Greyish background for Firefox */
+  border-radius: 3px;
+}
+
+#progress-bar::-moz-range-progress {
+  background: #ffffff; /* White progress for Firefox */
+  border-radius: 3px;
+}
+
+/* Toggle button styling */
+#toggle-btn {
+  background: none;
+  border: none;
+  padding: 0px;
+  margin: 0;
+  position: relative;
+}
+
+#toggle-btn::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 3px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+#toggle-btn:hover::after {
+  opacity: 1;
+}
+
+#toggle-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin-top: 1px;
+}
+
+/* Hover effect for toggle button similar to Spotify */
+#toggle-btn:hover #toggle-icon {
+  transform: scale(1.2);
+  transition: transform 0.2s;
+}
+
+/* Time display styling */
+.current-time, .full-time {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+
+.current-time {
+  margin-right: 10px; /* Adds space after the current time */
+}
+
+.full-time {
+  margin-left: 10px; /* Adds space before the full time */
+}
+
+#top-banner {
+  width: 100%;
+  height: 132px; /* Adjust the height as needed */
+  position: fixed; /* Makes it stick to the top */
+  top: 0;
+  left: 0;
+  z-index: 10; /* Ensures it appears above other elements */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Optional: adds shadow for depth */
+  transform: translateZ(0); /* Forces hardware acceleration */
+  will-change: transform; /* Optimizes for animations/changes */
+  backface-visibility: hidden; /* Prevents flickering in some browsers */
+  perspective: 1000; /* Helps with 3D transformations */
+  -webkit-font-smoothing: subpixel-antialiased; /* Improves text rendering */
+  display: flex; /* Use flexbox for easy positioning */
+  align-items: center; /* Center vertically */
+  padding-left: 20px; /* Add some space from the left edge */
+  background-color: rgba(255, 255, 255, 0.9); /* Optional: add a background color */
+}
+
+#pup-logo {
+  height: 110px; /* Height slightly less than the banner height */
+  width: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* Ensure the logo fits properly */
+}
+
+.banner-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 20px;
+  max-width: calc(100% - 150px); /* Allow space for the logo */
+  overflow: hidden; /* Prevent overflow */
+}
+
+.university-name {
+  font-family: "Times New Roman", Times, serif;
+  color: #8c0000;
+  font-size: clamp(18px, 3vw, 48px); /* Responsive font size between 18px and 48px */
+  margin: 0;
+  line-height: 1.2;
+  font-weight: bold;
+  white-space: normal; /* Allow text to wrap */
+  overflow-wrap: break-word; /* Break long words if needed */
+  hyphens: auto; /* Allow hyphenation */
+}
+
+.university-tagline {
+  font-family: "Times New Roman", Times, serif;
+  color: #000000;
+  font-size: clamp(14px, 2vw, 32px); /* Responsive font size between 14px and 32px */
+  margin: 0;
+  line-height: 1.2;
+  white-space: normal; /* Allow text to wrap */
+}
+
+/* Animation keyframes for fade-in rise effect */
+@keyframes fadeInRise {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply animation to hero section elements */
+#hero h1 {
+  opacity: 0;
+  animation: fadeInRise 1s ease-out 0.2s forwards;
+}
+
+#hero .subtitle {
+  opacity: 0;
+  animation: fadeInRise 1s ease-out 0.4s forwards;
+}
+
+#hero .authors {
+  opacity: 0;
+  animation: fadeInRise 1s ease-out 0.6s forwards;
+}
+
+/* Apply animation to lyrics section */
+#lyrics {
+  opacity: 0;
+  animation: fadeInRise 1.2s ease-out 0.8s forwards;
+}
+
+/* Staggered animation for lyric lines */
+.lyric-line {
+  opacity: 0;
+  animation: fadeInRise 0.8s ease-out forwards;
+}
+
+/* Apply increasing delay to each lyric line */
+.lyric-line:nth-child(1) { animation-delay: 1.0s; }
+.lyric-line:nth-child(2) { animation-delay: 1.1s; }
+.lyric-line:nth-child(3) { animation-delay: 1.2s; }
+.lyric-line:nth-child(4) { animation-delay: 1.3s; }
+.lyric-line:nth-child(5) { animation-delay: 1.4s; }
+.lyric-line:nth-child(6) { animation-delay: 1.5s; }
+.lyric-line:nth-child(7) { animation-delay: 1.6s; }
+.lyric-line:nth-child(8) { animation-delay: 1.7s; }
+.lyric-line:nth-child(9) { animation-delay: 1.8s; }
+.lyric-line:nth-child(10) { animation-delay: 1.9s; }
+.lyric-line:nth-child(11) { animation-delay: 2.0s; }
+.lyric-line:nth-child(12) { animation-delay: 2.1s; }
+.lyric-line:nth-child(13) { animation-delay: 2.2s; }
+.lyric-line:nth-child(14) { animation-delay: 2.3s; }
+.lyric-line:nth-child(15) { animation-delay: 2.4s; }
+.lyric-line:nth-child(16) { animation-delay: 2.5s; }
+.lyric-line:nth-child(17) { animation-delay: 2.6s; }
+
+/* Media queries for different screen sizes */
+@media screen and (max-width: 768px) {
+  #top-banner {
+    padding-left: 10px; /* Less padding on smaller screens */
+  }
+  
+  .banner-text {
+    margin-left: 10px; /* Less margin on smaller screens */
+  }
+  
+  #pup-logo {
+    height: 90px; /* Slightly smaller logo on small screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .university-name {
+    font-size: 16px; /* Fixed smaller size on very small screens */
+  }
+  
+  .university-tagline {
+    font-size: 12px; /* Fixed smaller size on very small screens */
+  }
+  
+  #pup-logo {
+    height: 70px; /* Much smaller logo on very small screens */
+  }
+}

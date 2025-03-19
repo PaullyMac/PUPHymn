@@ -1,0 +1,17 @@
+# Ignore specific image files
+20250315_114935.jpg
+backward.png
+forward.png
+hero-bg.jpg
+output-onlinetools.png
+puplogo_main_campus.png
+R.png
+Screenshot 2025-03-16 191535.png
+stop.png
+
+# Common files to ignore
+.DS_Store
+Thumbs.db
+.vscode/
+node_modules/
+*.log
