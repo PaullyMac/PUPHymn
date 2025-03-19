@@ -23,15 +23,14 @@ To run this project locally, follow these simple steps:
 
    Open your terminal and run:
    ```
-   git clone [repository-url]
+   git clone https://github.com/PaullyMac/PUPHymn.git
    ```
-   Replace `[repository-url]` with the URL of the repository.
 
 2. **Navigate to the Project Directory:**
    ```
-   cd Activity- -Single-Page
+   cd PUPHymn
    ```
-   (Ensure you are in the correct folder where the project files are located.)
+   (This is the folder created after cloning the repository.)
 
 3. **Open the HTML File:**
 
