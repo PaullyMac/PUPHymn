@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.6] - 2025-03-20
+### Added
+- **styles.css**
+  - Added hover effects for lyric lines with color change and horizontal movement
+  - Implemented cursor:pointer on lyric lines to indicate clickability
+- **script.js**
+  - Added click functionality to lyric lines that jumps to the corresponding timestamp in the audio
+  - Enhanced user experience by automatically playing audio when a lyric line is clicked
+- **Project Structure**
+  - Added .gitignore file to exclude specific image files and common system files from version control
+
 ## [1.0.5] - 2025-03-19
 ### Added
 - **index.html**
