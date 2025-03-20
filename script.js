@@ -20,6 +20,22 @@ document.addEventListener("DOMContentLoaded", function() {
  
   toggleBtn.setAttribute("title", "Play");
 
+  lyricLines.forEach(line => {
+    line.addEventListener("click", function() {
+      const lineTime = parseFloat(this.getAttribute("data-time"));
+      if (!isNaN(lineTime) && audioPlayer.duration) {
+        audioPlayer.currentTime = lineTime;
+        
+        // If the audio is paused, play it when a line is clicked
+        if (audioPlayer.paused) {
+          audioPlayer.play();
+          toggleIcon.src = "pause.png";
+          toggleBtn.setAttribute("title", "Pause");
+        }
+      }
+    });
+  });
+
   toggleBtn.addEventListener("click", function() {
     if (audioPlayer.paused) {
       audioPlayer.play();
