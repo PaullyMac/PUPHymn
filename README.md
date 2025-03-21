@@ -8,6 +8,8 @@ The webpage features the **PUP Hymn** and offers the following functionalities:
 - Displays the PUP Hymn lyrics synchronized with the audio playback.
 - A responsive header showcasing the title and subtitle.
 - An audio player with play/pause toggle, a progress bar, and real-time playback indicators.
+- Advanced volume control with an intuitive vertical slider that appears on hover and auto-hides after inactivity.
+- Skip forward/backward controls for easy navigation through the audio.
 - A visually appealing background image that scales to fit the screen.
 - Smooth lyric highlighting as the hymn plays.
 

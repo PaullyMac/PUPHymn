@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.0.7] - 2025-03-21
+### Added
+- **script.js**
+  - Implemented intelligent volume slider behavior that appears on hover and auto-hides after 3.5 seconds
+  - Added smooth fade transitions for improved user experience
+  - Enhanced volume control with icons that change based on mute state
+- **styles.css**
+  - Added animated transitions for the volume slider appearance/disappearance
+  - Implemented proper vertical slider orientation for intuitive volume control
+  - Created visual fill indicator showing current volume level with yellow accent color
+  
+### Improved
+- **Volume Control Interaction**
+  - Volume slider now remains visible when directly hovered
+  - Volume settings are preserved when toggling mute/unmute
+  - Volume slider now operates with natural vertical orientation (high at top, low at bottom)
+
 ## [1.0.6] - 2025-03-20
 ### Added
 - **styles.css**

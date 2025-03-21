@@ -422,6 +422,140 @@
 .lyric-line:nth-child(16) { animation-delay: 2.5s; }
 .lyric-line:nth-child(17) { animation-delay: 2.6s; }
 
+/* Volume control styling */
+.volume-container {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#volume-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.volume-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  position: absolute;
+  transition: opacity 0.2s, transform 0.2s;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.volume-icon.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#volume-btn:hover .volume-icon.active {
+  transform: scale(1.2);
+}
+
+.volume-slider-container {
+  height: 80px;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  margin-top: 10px;
+  position: absolute;
+  bottom: 40px;
+  /* Make it hidden by default with fade transition */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Show slider when this class is added */
+.volume-slider-container.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+#volume-slider {
+  -webkit-appearance: none;
+  width: 8px;
+  height: 80px;
+  background: #888888; /* Static gray background */
+  outline: none;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  border-radius: 4px;
+  -webkit-appearance: slider-vertical; /* For Webkit browsers */
+  writing-mode: bt-lr; /* For IE/Edge */
+  transform: rotate(360deg); /* Add this back to flip the physical orientation */
+}
+
+#volume-slider:hover {
+  opacity: 1;
+}
+
+#volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px; /* Slightly larger for better usability */
+  height: 16px;
+  background: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#volume-slider::-moz-range-thumb {
+  width: 16px; /* Slightly larger for better usability */
+  height: 16px;
+  background: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+/* Custom track styling for the volume slider */
+#volume-slider::-webkit-slider-runnable-track {
+  width: 8px;
+  height: 80px;
+  /* Use a pseudo-element approach for the yellow fill level */
+  background: transparent; /* Make the track transparent to show base background */
+  border-radius: 4px;
+  position: relative;
+}
+
+/* Create the yellow fill using a pseudo-element overlay */
+#volume-slider::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 8px;
+  height: calc(var(--volume, 100%) * 0.8px); /* Scale to match slider height */
+  background: #ffcc00; /* Yellow fill */
+  border-radius: 4px;
+  z-index: -1;
+}
+
+/* Ensure Firefox gets similar styling */
+#volume-slider::-moz-range-track {
+  background: #888888; /* Static gray background for Firefox */
+  border-radius: 4px;
+}
+
+#volume-slider::-moz-range-progress {
+  background: #ffcc00; /* Yellow fill for Firefox */
+  border-radius: 4px;
+}
+
 /* Media queries for different screen sizes */
 @media screen and (max-width: 768px) {
   #top-banner {
@@ -434,6 +568,11 @@
   
   #pup-logo {
     height: 90px; /* Slightly smaller logo on small screens */
+  }
+  
+  .volume-container {
+    right: 10px;
+    bottom: 10px;
   }
 }
 
@@ -448,5 +587,15 @@
   
   #pup-logo {
     height: 70px; /* Much smaller logo on very small screens */
+  }
+  
+  .volume-container {
+    right: 5px;
+    bottom: 5px;
+  }
+  
+  .volume-icon {
+    width: 20px;
+    height: 20px;
   }
 }

@@ -8,9 +8,20 @@ document.addEventListener("DOMContentLoaded", function() {
   const lyricLines = document.querySelectorAll(".lyric-line");
   const backwardBtn = document.getElementById("backward-btn");
   const forwardBtn = document.getElementById("forward-btn");
+  
+  // Volume control elements
+  const volumeBtn = document.getElementById("volume-btn");
+  const volumeOnIcon = document.getElementById("volume-on-icon");
+  const volumeOffIcon = document.getElementById("volume-off-icon");
+  const volumeSlider = document.getElementById("volume-slider");
+  const volumeSliderContainer = document.querySelector(".volume-slider-container");
 
   // Initialize current time to 0:00
   currentTimeSpan.innerText = "0:00";
+  
+  // Initialize the volume slider value and audio volume
+  audioPlayer.volume = volumeSlider.value / 100;
+  updateVolumeSliderAppearance();
   
   function formatTime(seconds) {
     const min = Math.floor(seconds / 60);
@@ -19,6 +30,90 @@ document.addEventListener("DOMContentLoaded", function() {
   }
  
   toggleBtn.setAttribute("title", "Play");
+
+  // Volume control functions
+  function updateVolumeSliderAppearance() {
+    const volumeValue = volumeSlider.value;
+    
+    // Since the slider is physically flipped, we don't need to invert the value
+    // Just use the direct value for the gradient
+    volumeSlider.style.setProperty('--volume', volumeValue + '%');
+    
+    // Update the volume icons based on volume value
+    if (volumeValue == "0") {
+      volumeOnIcon.classList.remove("active");
+      volumeOffIcon.classList.add("active");
+      volumeBtn.setAttribute("title", "Unmute");
+    } else {
+      volumeOnIcon.classList.add("active");
+      volumeOffIcon.classList.remove("active");
+      volumeBtn.setAttribute("title", "Mute");
+    }
+  }
+
+  // Update initial volume appearance
+  updateVolumeSliderAppearance();
+  
+  // Volume slider event listener - update for smoother operation
+  volumeSlider.addEventListener("input", function() {
+    const volumeValue = this.value;
+    audioPlayer.volume = volumeValue / 100;
+    
+    // Just use the direct value for the gradient
+    volumeSlider.style.setProperty('--volume', volumeValue + '%');
+    
+    updateVolumeSliderAppearance();
+  });
+  
+  // Volume button click event (mute/unmute)
+  volumeBtn.addEventListener("click", function() {
+    if (audioPlayer.volume > 0) {
+      // Store the current volume before muting
+      volumeBtn.dataset.prevVolume = volumeSlider.value;
+      volumeSlider.value = 0;
+      audioPlayer.volume = 0;
+    } else {
+      // Restore to previous volume or default to 100
+      const prevVolume = volumeBtn.dataset.prevVolume || 100;
+      volumeSlider.value = prevVolume;
+      audioPlayer.volume = prevVolume / 100;
+    }
+    updateVolumeSliderAppearance();
+  });
+
+  // Volume slider visibility control
+  let hideSliderTimeout;
+  
+  // Function to show the volume slider
+  function showVolumeSlider() {
+    // Clear any existing timeout
+    if (hideSliderTimeout) {
+      clearTimeout(hideSliderTimeout);
+    }
+    // Show the slider
+    volumeSliderContainer.classList.add("visible");
+  }
+  
+  // Function to hide the volume slider after delay
+  function scheduleHideVolumeSlider() {
+    // Set timeout to hide after 5 seconds
+    hideSliderTimeout = setTimeout(() => {
+      volumeSliderContainer.classList.remove("visible");
+    }, 3500); // 3.5 seconds delay
+  }
+  
+  // Show slider when hovering volume button
+  volumeBtn.addEventListener("mouseenter", showVolumeSlider);
+  volumeBtn.addEventListener("mouseleave", scheduleHideVolumeSlider);
+  
+  // Keep slider visible when hovering the slider itself
+  volumeSliderContainer.addEventListener("mouseenter", showVolumeSlider);
+  volumeSliderContainer.addEventListener("mouseleave", scheduleHideVolumeSlider);
+  
+  // Show the slider initially if needed
+  showVolumeSlider();
+  // Start the hide timer
+  scheduleHideVolumeSlider();
 
   lyricLines.forEach(line => {
     line.addEventListener("click", function() {

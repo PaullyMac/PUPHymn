@@ -56,7 +56,16 @@
       <input type="range" id="progress-bar" min="0" max="100" value="0">
       <span class="full-time">1:52</span>
     </div>
-
+    
+    <div class="volume-container">
+      <button id="volume-btn" title="Mute">
+        <img src="volume-on.png" alt="Volume On" id="volume-on-icon" class="volume-icon active">
+        <img src="volume-off.png" alt="Volume Off" id="volume-off-icon" class="volume-icon">
+      </button>
+      <div class="volume-slider-container">
+        <input type="range" id="volume-slider" min="0" max="100" value="100" orient="vertical">
+      </div>
+    </div>
   </footer>
 
   <script src="script.js"></script>
